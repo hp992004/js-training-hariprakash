@@ -38,7 +38,7 @@ const format_user = {
 const formatUser = (format_user) => `${format_user.name} — ${format_user.role}`;
 console.log(formatUser(format_user));
 
-//Section 4
+//Section 4 — Objects & Destructuring
 
 const user = {
   id: 1,
@@ -65,7 +65,7 @@ const updatedUser = {...user,active: false};
 
 console.log(updatedUser);
 
-//Section 5
+//Section 5 — Arrays & Spread
 
 const devs = ["Alice", "Carol"]
 const designers = ["Bob", "Dan"]
@@ -81,7 +81,7 @@ const [first, second] = team1;
 console.log(first);
 console.log(second);
 
-//Section 6
+//Section 6 — Array `map` & `filter`
 
 const users = [
   { id: 1, name: "Alice", role: "dev",    active: true  },
@@ -106,7 +106,7 @@ const activeDevs = users.filter(user => user.active && user.role === "dev").map(
 
 console.log(activeDevs);
 
-//Section 7
+//Section 7 — Array Functions
 
 const roleCount = users.reduce((acc, user) => {acc[user.role] = (acc[user.role] || 0) + 1;
   return acc;
@@ -126,7 +126,7 @@ const allHaveRole = users.every(user => user.role);
 
 console.log(allHaveRole);
 
-//Section 8
+//Section 8 — Spot & Fix the Bugs
 
 const input = "5";
 const score = 5;
@@ -183,7 +183,7 @@ userInfo.active = false;
 
 console.log(userInfo);
 
-//Section 9
+//Section 9 — Things to Be Aware Of
 
 const Username = "Alice";
 const username = "Bob";
