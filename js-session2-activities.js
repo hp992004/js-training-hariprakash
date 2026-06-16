@@ -1,5 +1,4 @@
 //Activity 1 - Undertanding Aync Behaviour
-
 //1
 console.log("1")
 setTimeout(() => console.log("2"), 1000)
