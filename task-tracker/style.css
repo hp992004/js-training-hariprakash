@@ -1,0 +1,201 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --color-bg: #f4f7fa;
+    --color-card: #ffffff;
+    --color-task: #eef4ff;
+    --color-text: #333333;
+    --color-primary: #2563eb;
+    --color-border: #d1d5db;
+    --color-input: #ffffff;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+.dark {
+    --color-bg: #0f172a;
+    --color-card: #1e293b;
+    --color-task: #334155;
+    --color-text: #f8fafc;
+    --color-primary: #60a5fa;
+    --color-border: #475569;
+    --color-input: #334155;
+    --color-shadow: rgba(0, 0, 0, 0.4);
+}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+}
+footer {
+    background-color: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+section {
+    background-color: var(--color-card);
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--color-shadow);
+}
+h1,h2 {
+    margin-top: 0;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+input,select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: var(--color-input);
+    color: var(--color-text);
+}
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    opacity: 0.9;
+}
+#theme-toggle {
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+.dark #theme-toggle {
+    background-color: #facc15;
+    color: #1e293b;
+}
+#clear-all {
+    background-color: #dc2626;
+    margin-top: 15px;
+}
+#clear-all:hover {
+    background-color: #b91c1c;
+}
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: var(--color-task);
+    border-left: 5px solid var(--color-primary);
+    border-radius: 6px;
+}
+li button {
+    background-color: #16a34a;
+}
+li button:hover {
+    background-color: #15803d;
+}
+.done {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    border: 1px solid var(--color-border);
+}
+th,td {
+    border: 1px solid var(--color-border);
+    padding: 12px;
+    text-align: center;
+}
+th {
+    background-color: var(--color-primary);
+    color: white;
+}
+td {
+    background-color: var(--color-card);
+    color: var(--color-text);
+}
+tr:nth-child(even) td {
+    background-color: var(--color-task);
+}
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal.show {
+    display: flex;
+}
+.modal-content {
+    width: 400px;
+    background-color: var(--color-card);
+    color: var(--color-text);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--color-shadow);
+}
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+.action-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+#export-btn{
+    background:#16a34a;
+}
+#export-btn:hover{
+    background:#15803d;
+}
+.drag-over {
+    border: 2px dashed var(--color-primary);
+    transform: scale(1.02);
+    transition: 0.2s;
+}

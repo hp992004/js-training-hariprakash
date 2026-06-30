@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Task Tracker</h1>
+        <button id="theme-toggle">Dark Mode</button>
+    </header>
+    <main>
+        <section id="task-form-section">
+            <h2>Add a New Task</h2>
+            <form id="task-form">
+                <div>
+                    <label for="task-name">Task Name</label>
+                    <input type="text" id="task-name" placeholder="Enter task name" required>
+                </div>
+                <div>
+                    <label for="priority">Priority</label>
+                    <select id="priority" required>
+                        <option value="">Select Priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="due-date">Due Date</label>
+                    <input type="date" id="due-date" required>
+                </div>
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+        <section id="tasks">
+            <h2>Task List</h2>
+            <div class="controls">
+                <button type="button" id="all-btn">All</button>
+                <button type="button" id="pending-btn">
+                    Pending
+                </button>
+                <button type="button" id="done-btn">
+                    Done
+                </button>
+                <select id="sort-select">
+                    <option value="">Sort By</option>
+                    <option value="priority">By Priority</option>
+                    <option value="date">By Due Date</option>
+                </select>
+            </div>
+            <p id="task-counter">
+                Showing 0 of 0 tasks
+            </p>
+            <ul id="task-list"></ul>
+            <button type="button" id="clear-all">Clear All</button>
+            <button id="export-btn">Download as JSON</button>
+        </section>
+        <section id="summary">
+            <h2>Task Summary</h2>
+            <table id="summary-table">
+                <tr>
+                    <th>Priority</th>
+                    <th>Number of Tasks</th>
+                </tr>
+            </table>
+        </section>
+        <section id="edit-modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit Task</h2>
+                <label for="edit-task-name">Task Name</label>
+                <input type="text" id="edit-task-name">
+                <div class="modal-buttons">
+                    <button id="save-task">Save</button>
+                    <button id="cancel-edit">Cancel</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Hariprakash I A</p>
+    </footer>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
