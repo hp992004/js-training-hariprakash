@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+/*
+The stylesheet is linked in the <head> so the browser loads and applies the CSS
+before rendering the page. This prevents unstyled content from briefly appearing
+and ensures the page is displayed correctly as soon as it loads.
+*/
+
+h2 {
+    color: #ff0000;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.highlight {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#contact-section {
+    background-color: #97fcff;
+    padding: 15px;
+    border-radius: 10px;
+}
+/*
+When both a tag selector and a class selector apply conflicting styles to the
+same element, the class selector takes precedence because it has higher
+specificity. For example, if both set different text colors, the color defined
+in the class selector will be applied.
+*/
+
+p {
+  color: black;
+}
+
+.intro-text {
+  color: blue;
+}
+
+#about-paragraph {
+  color: green;
+}
+
+/*
+1. The paragraph is green because the ID selector has a
+   higher specificity than both the class selector and the
+   element selector.
+
+2. To make the p tag rule win, you would need to remove the class and ID from
+   the paragraph.
+
+3. Specificity order (lowest to highest):
+   Element selector (p)                 Lowest Specificity
+   Class selector (.intro-text)         Medium Specificity
+   ID selector (#about-paragraph)       Highest Specificity
+*/
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    margin-right: 20px;
+    color: #3498db;
+    text-decoration: none;
+}

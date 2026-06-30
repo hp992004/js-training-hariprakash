@@ -1,0 +1,22 @@
+* { box-sizing: border-box; }
+
+.first {
+  background-color: #ffe0e0;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+
+.second {
+  background-color: #e0e0ff;
+  padding: 10px;
+  margin-top: 20px;
+}
+/*
+The gap between the two paragraphs is 40px, not 60px. This is because the
+top and bottom margins collapse into a single margin, and the browser uses
+the larger of the two values instead of adding them together.
+
+Margin collapse does not happen when elements are side by side, when there is
+padding or a border between them, or when they are inside a flexbox or grid
+container.
+*/

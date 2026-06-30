@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.card {
+    width: 320px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+}
+
+header {
+    padding: 20px 20px 10px;
+}
+
+header h2 {
+    margin: 0;
+}
+
+.job-title {
+    margin-top: 6px;
+    color: gray;
+    font-size: 0.95rem;
+}
+
+.bio {
+    padding: 0 20px;
+    margin: 10px 0 20px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0 20px 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/*
+box-shadow used to give the card a shadow and make it stand out.
+
+0 → keeps the shadow centered horizontally.
+4px → moves the shadow slightly below the card.
+10px → blurs the shadow so it looks smooth instead of sharp.
+rgba(0, 0, 0, 0.15) → uses a light black color with low opacity to create a subtle shadow.
+
+Declaration:
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+*/

@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+.border,
+.outline {
+    width: 300px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+}
+
+.border {
+    border: 3px solid #3498db;
+}
+
+.outline {
+    outline: 3px solid #ff9800;
+}
+
+/*
+Difference between border and outline:
+
+A border is part of the element and takes up space, while an outline is drawn
+outside the element and doesn't affect its size or layout.
+
+We use a border to style elements like cards or buttons. We use an outline to
+highlight an element when it receives focus, such as a button or input field,
+so it's easier for users to see what they're interacting with.
+*/
+
+.box {
+    width: 250px;
+    height: 100px;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: lightblue;
+    border: 2px solid steelblue;
+}
+
+.hidden-box {
+    visibility: hidden;
+}
+
+.removed-box {
+    display: none;
+}
+
+/*
+Difference between display: none and visibility: hidden:
+
+display: none removes the element completely, so it no longer takes up any
+space on the page.
+
+visibility: hidden hides the element, but it still takes up its original
+space in the layout.
+*/
+
+.hidden {
+    overflow: hidden;
+}
+
+.scroll {
+    overflow: scroll;
+}
+
+.auto {
+    overflow: auto;
+}
+
+/*
+The overflow property controls what happens when the content is too big to fit
+inside its container.
+
+overflow: hidden hides the extra content.
+overflow: scroll always displays scrollbars so the hidden content can be viewed.
+overflow: auto only displays scrollbars when they are actually needed.
+*/
