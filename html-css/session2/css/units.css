@@ -1,0 +1,64 @@
+.box-px{
+    width:300px;
+    background:#f0f4ff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #000;
+}
+.box-percent {
+  width: 50%;
+  background: #fff0f4;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #000;
+}
+.box-rem {
+  width: 20rem;
+  background: #f0fff4;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #000;
+}
+.box-vw {
+  width: 60vw;
+  background: #fffbf0;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #000;
+}
+/*
+When we make the browser window smaller, the % and vw boxes resize with the
+window, while the px and rem boxes mostly stay the same size.
+*/
+
+/* We can use px when we want an element to have a fixed size, like an icon,
+border, or logo. We use rem when we want sizes to scale with the font size,
+and we use % or vw when we want elements to resize automatically for different
+screen sizes.
+*/
+
+html {
+  font-size: 20px;
+}
+
+.font-demo {
+  font-size: 12px;
+}
+
+.px-text {
+  font-size: 16px;
+}
+
+.rem-text {
+  font-size: 1rem;
+}
+
+.em-text {
+  font-size: 1.5em;
+}
+/*
+When we change the html font size, the rem text scales, the px text stays the same,
+and the em text depends on its parent element's font size.
+*/
+
+/* rem is based on the html font size, while em is based on the parent element's font size. */

@@ -1,0 +1,77 @@
+.responsive-box {
+  background: #fef3c7;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-box {
+    background: #d1fae5;
+    padding: 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-box {
+    background: #dbeafe;
+    padding: 3rem;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+/*
+min-width applies styles when the screen is at or above a certain width,
+while max-width applies styles below a certain width. This is a mobile-first approach.
+*/
+
+.resp-nav {
+  background: #1e1b4b;
+  padding: 1rem;
+}
+.resp-logo {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.resp-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.resp-links a {
+  color: #a5b4fc;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .resp-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .resp-logo {
+    margin-bottom: 0;
+  }
+  .resp-links {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/*
+Without max-width: 100%, the image becomes too wide and goes outside its container.
+max-width: 100% makes the image fit inside the available space.
+height: auto keeps the image looking natural without stretching or squashing it.
+*/

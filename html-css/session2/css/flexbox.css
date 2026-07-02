@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  background: #eee;
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: stretch;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.item {
+  background: #4f46e5;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+}
+/*justify-content: center; -  Center all items horizontally */
+/*justify-content: space-between; - Place items with equal space between them */
+/*justify-content: space-evenly; - Place items with equal space around them */
+/*align-items: flex-start; - Align items to the top of the container */
+/*align-items: stretch; - Stretch items to fill the container's height */
+/*flex-direction: column; - Stack items vertically */
+/*flex-wrap: wrap; - Allow items to move to the next line when there isn't enough space */
+
+.grow-container {
+  display: flex;
+  gap: 1rem;
+  background: #eee;
+  padding: 1rem;
+}
+.grow-1 { flex-grow: 1; background: #818cf8; padding: 1rem; }
+.grow-2 { flex-grow: 3; background: #4f46e5; color: white; padding: 1rem; }
+
+/*
+The extra space is shared based on the flex-grow value. When grow-2 is changed
+to 3, it takes more space than before compared to the other items.
+*/
+
+/* flex-grow decides how much extra space a flex item gets. A larger value means
+the item grows more than items with smaller values. */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  padding: 1rem 2rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a,
+.logo {
+  color: white;
+  text-decoration: none;
+}
+
+.card-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.card {
+  flex: 1;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+/*
+When we add a fourth card, all four cards share the available space. After
+adding flex-wrap: wrap, the cards move to the next line when the window is too small.
+*/

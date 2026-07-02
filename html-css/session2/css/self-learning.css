@@ -1,0 +1,79 @@
+/* CSS Variables:
+We can store colors or other values in variables and reuse them.
+This makes the CSS cleaner and easier to update.
+Changing one variable updates it everywhere it is used.
+*/
+:root {
+    --primary: #4f46e5;
+    --secondary: #e0e7ff;
+    --text: #222;
+    --footer: #333;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+}
+
+/* grid-template-areas:
+We can give names to different sections of the grid.
+This makes the layout easier to understand and arrange.
+It is simpler than using row and column numbers.
+*/
+header {
+    grid-area: header;
+    background: var(--primary);
+    color: white;
+    padding: 1rem;
+}
+
+aside {
+    grid-area: sidebar;
+    background: var(--secondary);
+    padding: 1rem;
+}
+
+main {
+    grid-area: main;
+    padding: 1rem;
+}
+
+footer {
+    grid-area: footer;
+    background: var(--footer);
+    color: white;
+    padding: 1rem;
+}
+
+/* clamp():
+clamp() automatically adjusts the font size as the screen size changes.
+It always stays between a minimum and maximum size.
+This helps create responsive text without media queries.
+*/
+h1 {
+    font-size: clamp(1rem, 5vw, 2.5rem);
+}
+
+/* aspect-ratio:
+aspect-ratio keeps the width and height in the same proportion.
+The element changes size without losing its shape.
+It is useful for responsive cards, images, and videos.
+*/
+.card {
+    aspect-ratio: 16 / 9;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
