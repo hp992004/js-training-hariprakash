@@ -1,0 +1,22 @@
+{
+  "name": "session1",
+  "version": "1.0.0",
+  "description": "This project demonstrates the basics of node.js",
+  "main": "compare.js",
+  "scripts": {
+    "start": "node dates.js",
+    "dev": "nodemon dates.js",
+    "hello": "node hello.js",
+    "info": "node system-info.js"
+  },
+  "keywords": [],
+  "author": "Hariprakash I A",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dayjs": "^1.11.21"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
