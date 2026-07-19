@@ -34,6 +34,7 @@ test('does not call onRemove when row is only rendered', () => {
 
   expect(onRemove).not.toHaveBeenCalled()
 })
+
 /*
 `screen.debug()` prints the rendered HTML in the test output.
 It helps you see what was actually rendered so you can choose

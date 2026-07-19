@@ -1,3 +1,4 @@
+expect.hasAssertions()
 import { render,screen} from '../test/test-utils'
 import InternCard from './InternCard'
 
