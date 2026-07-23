@@ -11,7 +11,8 @@ function AddInternForm(props: AddInternFormProps) {
   const { form, error, handleChange, handleReset, isValid } = useInternForm()
   const { addIntern, interns } = useInterns()
 
-  function handleSubmit(): void {
+  function handleSubmit(e?: React.FormEvent): void {
+    e?.preventDefault()
     if (!isValid()) return
 
     const newIntern = { id: interns.length + 1, ...form }
@@ -21,10 +22,10 @@ function AddInternForm(props: AddInternFormProps) {
   }
 
   return (
-    <div>
+    <form role="form" aria-label="Add Intern" onSubmit={handleSubmit}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <label htmlFor="name">Name</label>
+      <label htmlFor="name">Intern Name</label>
       <input
         id="name"
         name="name"
@@ -52,19 +53,21 @@ function AddInternForm(props: AddInternFormProps) {
         placeholder="Score"
       />
 
-      <input
-        name="isPresent"
-        type="checkbox"
-        checked={form.isPresent}
-        onChange={handleChange}
-      />
-      <label>Present</label>
+      <label htmlFor="present">
+        <input
+          id="present"
+          name="isPresent"
+          type="checkbox"
+          checked={form.isPresent}
+          onChange={handleChange}
+        />
+        Present
+      </label>
 
-      <button onClick={handleSubmit}>Add Intern</button>
-      <button onClick={handleReset}>Reset</button>
-    </div>
+      <button type="submit">Add Intern</button>
+      <button type="button" onClick={handleReset}>Reset</button>
+    </form>
   )
 }
 
 export default AddInternForm
-

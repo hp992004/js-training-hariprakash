@@ -28,7 +28,18 @@ In CI, it retries twice; locally, it doesn't retry.
     */
     trace: "on",
     screenshot: "only-on-failure",
+      video: 'on-first-retry',       // record a video when a test retries
+  headless: true,
   },
+
+  expect: { timeout: 5_000 },     // assertion timeout — separate from test timeout
+
+/*
+timeout sets the maximum time allowed for the entire test to complete, including
+all actions and assertions. expect.timeout controls how long a single assertion
+waits for a condition to become true, such as an element appearing after an
+API call or animation, without extending the overall test timeout.
+*/
 
   projects: [
     /*
@@ -37,8 +48,15 @@ It automatically sets the viewport size, user agent, and device pixel ratio.
 */
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+      { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
+  { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
   ],
+  /*
+...devices['Pixel 5'] applies a predefined mobile device configuration. It sets
+the viewport size, the user agent string, and touch/mobile capabilities so the
+browser behaves like a real Pixel 5 during testing.
+*/
 
   webServer: {
     command: "npm run dev",
