@@ -27,12 +27,25 @@ function useInternForm(): UseInternFormReturn {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void {
     const { name, value, type } = e.target
+    const nextValue =
+      type === 'checkbox'
+        ? (e.target as HTMLInputElement).checked
+        : name === 'score'
+          ? Number(value)
+          : value
+
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : name === 'score' ? Number(value) : value,
+      [name]: nextValue,
     }))
+
+    // Clear error as soon as user makes the form potentially valid
+    if (name === 'name' && String(nextValue).trim()) {
+      setError('')
+    }
+    if (name === 'score' && Number(nextValue) >= 0 && Number(nextValue) <= 100) {
+      setError('')
+    }
   }
 
   function handleReset(): void {
@@ -41,8 +54,16 @@ function useInternForm(): UseInternFormReturn {
   }
 
   function isValid(): boolean {
-    if (!form.name.trim()) { setError('Name is required'); return false }
-    if (form.score < 0 || form.score > 100) { setError('Score must be 0–100'); return false }
+    if (!form.name.trim()) {
+      setError('Name is required')
+      return false
+    }
+
+    if (form.score < 0 || form.score > 100) {
+      setError('Score must be between 0 and 100')
+      return false
+    }
+
     setError('')
     return true
   }
