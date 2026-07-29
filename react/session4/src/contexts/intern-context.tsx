@@ -18,16 +18,23 @@ export function InternProvider({ children }: { children: ReactNode }) {
   const [interns,   setInterns]   = useState<Intern[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const defaultInterns: Intern[] = [
+    { id: 1, name: 'Rahul', score: 92, role: 'Frontend',  isPresent: true  },
+    { id: 2, name: 'Priya', score: 78, role: 'Backend',   isPresent: true  },
+    { id: 3, name: 'Amit',  score: 45, role: 'Frontend',  isPresent: false },
+    { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true  },
+  ]
+
   useEffect(() => {
-    setTimeout(() => {
-      setInterns([
-        { id: 1, name: 'Rahul', score: 92, role: 'Frontend',  isPresent: true  },
-        { id: 2, name: 'Priya', score: 78, role: 'Backend',   isPresent: true  },
-        { id: 3, name: 'Amit',  score: 45, role: 'Frontend',  isPresent: false },
-        { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true  },
-      ])
+    const timer = setTimeout(() => {
+      setInterns(prev => {
+        const existingNames = new Set(prev.map(i => i.name))
+        const missing = defaultInterns.filter(d => !existingNames.has(d.name))
+        return missing.length > 0 ? [...prev, ...missing] : prev
+      })
       setIsLoading(false)
     }, 800)
+    return () => clearTimeout(timer)
   }, [])
 
   function addIntern(intern: Intern): void {
