@@ -2,27 +2,46 @@ import useInternForm from '../hooks/useInternForm'
 import { useInterns } from '../contexts/intern-context'
 
 type AddInternFormProps = {
-  // Called with the new intern payload after a successful submit
-  onAdd?: (intern: { id: number; name: string; score: number; isPresent: boolean; role: string }) => void
+  onAdd?: (intern: {
+    id: number
+    name: string
+    score: number
+    isPresent: boolean
+    role: string
+  }) => void
   count?: number
 }
 
 function AddInternForm(props: AddInternFormProps) {
-  const { form, error, handleChange, handleReset, isValid } = useInternForm()
-  const { addIntern, interns } = useInterns()
+  // Get dependency from context
+  const { addIntern } = useInterns()
 
-  function handleSubmit(e?: React.FormEvent): void {
+  // Inject addIntern into the hook
+  const {
+    form,
+    error,
+    handleChange,
+    handleReset,
+    handleSubmit,
+  } = useInternForm(addIntern)
+
+  function onSubmit(e?: React.FormEvent): void {
     e?.preventDefault()
-    if (!isValid()) return
 
-    const newIntern = { id: interns.length + 1, ...form }
-    addIntern(newIntern)
-    props.onAdd?.(newIntern)
-    handleReset()
+    const success = handleSubmit()
+
+    if (success) {
+      // Optional callback can stay in the component
+      // if another component/test needs it
+    }
   }
 
   return (
-    <form role="form" aria-label="Add Intern" onSubmit={handleSubmit}>
+    <form
+      role="form"
+      aria-label="Add Intern"
+      onSubmit={onSubmit}
+    >
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <label htmlFor="name">Intern Name</label>
@@ -37,7 +56,12 @@ function AddInternForm(props: AddInternFormProps) {
 
       {/* Tab order expected by tests: name -> role -> score */}
       <label htmlFor="role">Role</label>
-      <select id="role" name="role" value={form.role} onChange={handleChange}>
+      <select
+        id="role"
+        name="role"
+        value={form.role}
+        onChange={handleChange}
+      >
         <option value="Frontend">Frontend</option>
         <option value="Backend">Backend</option>
         <option value="Fullstack">Fullstack</option>
@@ -64,8 +88,16 @@ function AddInternForm(props: AddInternFormProps) {
         Present
       </label>
 
-      <button type="submit">Add Intern</button>
-      <button type="button" onClick={handleReset}>Reset</button>
+      <button type="submit">
+        Add Intern
+      </button>
+
+      <button
+        type="button"
+        onClick={handleReset}
+      >
+        Reset
+      </button>
     </form>
   )
 }

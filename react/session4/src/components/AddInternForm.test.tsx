@@ -164,7 +164,7 @@ describe('AddInternForm', () => {
       await user.type(screen.getByPlaceholderText('Score'), '150')
       await user.click(screen.getByRole('button', { name: 'Add Intern' }))
 
-      expect(screen.getByText('Score must be between 0 and 100')).toBeInTheDocument()
+expect(screen.getByText('Score must be 0–100')).toBeInTheDocument()
     })
 
     test('clears error when valid name is entered', async () => {

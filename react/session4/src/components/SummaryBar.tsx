@@ -1,30 +1,68 @@
-import { useMemo } from 'react'
+/*
+Testability audit — SummaryBar.tsx
+
+Q1 Predictable output?       YES — same intern data always produces the same summary
+Q2 No external dependencies? NO — depends on the InternContext for its data
+Q3 Dependencies injectable?  YES — the context can be mocked during testing
+
+Verdict: MODERATELY TESTABLE
+*/
 import { useInterns } from '../contexts/intern-context'
 
-
-function SummaryBar() {
-  const { interns, isLoading } = useInterns()
-
-  const summary = useMemo(() => {
-    const total = interns.length
-    const present = interns.filter(i => i.isPresent).length
-    const avg = total > 0 ? Math.round(interns.reduce((sum, i) => sum + i.score, 0) / total) : 0
-
-    return { total, present, avg }
-  }, [interns])
-
-  if (isLoading) return <p>Loading summary...</p>
-
+export function SummaryBar({
+  total,
+  presentCount,
+  averageScore,
+}: {
+  total: number
+  presentCount: number
+  averageScore: number
+}) {
   return (
-    <div style={{ padding: '12px', background: '#f9f9f9', marginBottom: '12px' }}>
+    <div
+      style={{
+        padding: '12px',
+        background: '#f9f9f9',
+        marginBottom: '12px',
+      }}
+    >
       <p>
-        Total: {summary.total} | Present: {summary.present} | Avg Score: {summary.avg}
+        Total: {total} | Present: {presentCount} | Avg Score: {averageScore}
       </p>
     </div>
   )
 }
 
-export default SummaryBar
+export function SummaryBarContainer() {
+  const { interns, isLoading } = useInterns()
+
+  if (isLoading) {
+    return <p>Loading summary...</p>
+  }
+
+  const total = interns.length
+
+  const presentCount = interns.filter(
+    intern => intern.isPresent
+  ).length
+
+  const averageScore = interns.length
+    ? Math.round(
+        interns.reduce((sum, intern) => sum + intern.score, 0) /
+          interns.length
+      )
+    : 0
+
+  return (
+    <SummaryBar
+      total={total}
+      presentCount={presentCount}
+      averageScore={averageScore}
+    />
+  )
+}
+
+export default SummaryBarContainer
 
 /*
 `SummaryBar` depends on the `useInterns` context to get intern data and loading state.
