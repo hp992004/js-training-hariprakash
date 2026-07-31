@@ -1,0 +1,182 @@
+.pricing-section {
+  padding: 120px 8%;
+  background: #0f172a;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.pricing-header h2 {
+  color: white;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+}
+
+.pricing-header p {
+  color: #94a3b8;
+  max-width: 650px;
+  margin: 20px auto;
+  line-height: 1.8;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.pricing-card {
+  background: #172033;
+  border: 1px solid #2d3b52;
+  border-radius: 20px;
+  padding: 35px;
+  position: relative;
+  transition: 0.35s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: #7c3aed;
+}
+
+.pricing-card.popular {
+  border: 2px solid #7c3aed;
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(124, 58, 237, 0.3);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7c3aed;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pricing-card h3 {
+  color: white;
+  text-align: center;
+}
+
+.pricing-card h1 {
+  text-align: center;
+  color: white;
+  margin: 20px 0;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+.description {
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.delivery {
+  color: white;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 35px;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cbd5e1;
+  margin-bottom: 15px;
+}
+
+.pricing-card li svg {
+  color: #7c3aed;
+  flex-shrink: 0;
+}
+
+.pricing-card button {
+  width: 100%;
+  padding: 15px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pricing-card button:hover {
+  background: #6d28d9;
+}
+
+@media (max-width: 992px) {
+
+  .pricing-section {
+    padding: 100px 6%;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .pricing-card.popular {
+    transform: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .pricing-section {
+    padding: 80px 5%;
+  }
+
+  .pricing-card {
+    padding: 28px;
+  }
+
+  .pricing-card button {
+    padding: 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .pricing-section {
+    padding: 70px 20px;
+  }
+
+  .pricing-header {
+    margin-bottom: 50px;
+  }
+
+  .pricing-card {
+    padding: 22px;
+  }
+
+  .pricing-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .pricing-card li {
+    font-size: 0.95rem;
+  }
+
+  .popular-badge {
+    font-size: 0.75rem;
+    padding: 6px 14px;
+  }
+
+}

@@ -1,38 +1,35 @@
-import { useState, useMemo } from 'react'
+/*
+Testability audit — useInternSearch.ts
+
+Q1 Predictable output?       YES — same interns and search always produce the same result
+Q2 No external dependencies? YES — no API calls, timers, or browser APIs
+Q3 Dependencies injectable?  YES — interns are passed as input to the hook
+
+Verdict: HIGHLY TESTABLE
+*/
+
+import { useMemo } from 'react'
+import { filterInterns } from '../utils/intern-utils'
 
 interface Intern {
-  id: number; name: string; score: number; role: string; isPresent: boolean
+  id: number
+  name: string
+  score: number
+  role: string
+  isPresent: boolean
 }
 
-interface UseInternSearchReturn {
-  search:    string
-  setSearch: (value: string) => void
-  filtered:  Intern[]
-  stats: {
-    total:   number
-    present: number
-    avg:     number
-  }
-}
+function useInternSearch(
+  interns: Intern[],
+  searchTerm: string,
+  filter: typeof filterInterns = filterInterns
+): Intern[] {
+  const filtered = useMemo(
+    () => filter(interns, searchTerm),
+    [interns, searchTerm, filter]
+  )
 
-function useInternSearch(interns: Intern[]): UseInternSearchReturn {
-  const [search, setSearch] = useState<string>('')
-
-  const filtered = useMemo<Intern[]>(() =>
-    interns.filter(i =>
-      i.name.toLowerCase().includes(search.toLowerCase())
-    ),
-  [interns, search])
-
-  const stats = useMemo(() => ({
-    total:   interns.length,
-    present: interns.filter(i => i.isPresent).length,
-    avg:     interns.length > 0
-      ? Math.round(interns.reduce((s, i) => s + i.score, 0) / interns.length)
-      : 0,
-  }), [interns])
-
-  return { search, setSearch, filtered, stats }
+  return filtered
 }
 
 export default useInternSearch

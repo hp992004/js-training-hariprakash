@@ -14,6 +14,7 @@ function InternSearch() {
       <input
         type="text"
         placeholder="Search intern..."
+        aria-label="Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -22,13 +23,17 @@ function InternSearch() {
       <p>Present: {stats.present}</p>
       <p>Average Score: {stats.avg}</p>
 
-      {filtered.map((intern) => (
-        <ThemedCard
-        key={intern.id}
-        name={intern.name}
-        score={intern.score}
-        />
-      ))}
+      {filtered.length === 0 ? (
+        <p>No interns found</p>
+      ) : (
+        filtered.map((intern) => (
+          <ThemedCard
+          key={intern.id}
+          name={intern.name}
+          score={intern.score}
+          />
+        ))
+      )}
     </div>
   )
 }
