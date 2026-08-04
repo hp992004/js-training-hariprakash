@@ -213,3 +213,20 @@ Job: "This file displays the intern summary and uses a container component to ob
 AddInternForm.tsx
 Job: "This file renders the Add Intern form and delegates form behavior to the useInternForm coordination hook."
 
+
+
+Comment:
+
+Yes, every file has a clearer and more focused one-sentence description after the refactor because each file now has a more specific responsibility. The file that is still the hardest to describe in one sentence is useInternForm.ts because it acts as a coordination hook. It manages the form state while also coordinating between the UI, the service layer, and the context, so its responsibility spans multiple layers even though it doesn't contain the core business logic.
+
+## Explore:
+
+1.No. I only needed to update the service layer by adding sortInternsByScore() and the UI/container layer by calling the service and passing the sorted data to the component. The repository and context did not need any changes because sorting is a business rule, not a data storage or state management responsibility.
+
+2.No. We did not need to change intern-service.ts because its responsibility is business logic, not data persistence. We also did not need to change any components because they interact with the repository through the context and are unaware of where the data is stored. Only the repository needed to change since persistence is part of the data storage layer.
+
+3.Moving validateInternForm inside createIntern can be a good design because it guarantees that an invalid Intern object can never be created. This centralizes the validation logic and removes the need for callers, such as the context provider, to perform the same validation separately.
+
+The tradeoff is that createIntern now throws an error when the input is invalid, so every caller must be prepared to handle that exception. This can make error handling more complex. Keeping validation separate gives callers more flexibility, while validating inside createIntern provides stronger guarantees that only valid objects are created.
+
+4.Yes. intern-service.ts has higher coverage than the original intern-context.tsx because it contains small, pure functions that can be tested directly without React, hooks, or context setup. The original intern-context.tsx mixed state management, context, and business logic, making it more difficult to exercise every code path in tests. Separating the business logic into the service layer made the functions easier to isolate and increased the overall test coverage.
