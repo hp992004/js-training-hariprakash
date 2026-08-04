@@ -8,56 +8,56 @@ Q3 Dependencies injectable?  YES — the context can be mocked during testing
 Verdict: MODERATELY TESTABLE
 */
 import { useInterns } from '../contexts/intern-context'
-
+import {   sortInternsByScore,calculateAverageScore } from '../services/intern-service'
+import type { Intern } from '../types/intern'
 export function SummaryBar({
   total,
   presentCount,
   averageScore,
+  sortedInterns,
 }: {
   total: number
   presentCount: number
   averageScore: number
+  sortedInterns: Intern[]
 }) {
   return (
-    <div
-      style={{
-        padding: '12px',
-        background: '#f9f9f9',
-        marginBottom: '12px',
-      }}
-    >
+    <div>
       <p>
         Total: {total} | Present: {presentCount} | Avg Score: {averageScore}
       </p>
+
+      <ul>
+        {sortedInterns.map(intern => (
+          <li key={intern.id}>
+            {intern.name} - {intern.score}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 
 export function SummaryBarContainer() {
-  const { interns, isLoading } = useInterns()
-
-  if (isLoading) {
-    return <p>Loading summary...</p>
-  }
+  const { interns} = useInterns()
 
   const total = interns.length
+
+  const sortedInterns = sortInternsByScore(interns, 'desc')
 
   const presentCount = interns.filter(
     intern => intern.isPresent
   ).length
 
-  const averageScore = interns.length
-    ? Math.round(
-        interns.reduce((sum, intern) => sum + intern.score, 0) /
-          interns.length
-      )
-    : 0
+  // Use the service instead of calculating here
+  const averageScore = calculateAverageScore(interns)
 
   return (
     <SummaryBar
       total={total}
       presentCount={presentCount}
       averageScore={averageScore}
+      sortedInterns={sortedInterns}
     />
   )
 }

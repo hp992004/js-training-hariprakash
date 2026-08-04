@@ -1,6 +1,24 @@
 import { describe, test, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { SummaryBar } from '../components/SummaryBar'
+import type { Intern } from '../types/intern'
+
+const sortedInterns: Intern[] = [
+  {
+    id: 1,
+    name: 'Rahul',
+    score: 92,
+    role: 'Frontend',
+    isPresent: true,
+  },
+  {
+    id: 2,
+    name: 'Priya',
+    score: 78,
+    role: 'Backend',
+    isPresent: false,
+  },
+]
 
 describe('SummaryBar', () => {
   test('shows correct total', () => {
@@ -9,6 +27,7 @@ describe('SummaryBar', () => {
         total={3}
         presentCount={2}
         averageScore={80}
+        sortedInterns={sortedInterns}
       />
     )
 
@@ -21,6 +40,7 @@ describe('SummaryBar', () => {
         total={3}
         presentCount={2}
         averageScore={80}
+        sortedInterns={sortedInterns}
       />
     )
 
@@ -33,6 +53,7 @@ describe('SummaryBar', () => {
         total={0}
         presentCount={0}
         averageScore={0}
+        sortedInterns={[]}
       />
     )
 
@@ -45,6 +66,7 @@ describe('SummaryBar', () => {
         total={3}
         presentCount={2}
         averageScore={80}
+        sortedInterns={sortedInterns}
       />
     )
 
@@ -53,6 +75,7 @@ describe('SummaryBar', () => {
         total={5}
         presentCount={4}
         averageScore={90}
+        sortedInterns={sortedInterns}
       />
     )
 
@@ -62,6 +85,14 @@ describe('SummaryBar', () => {
   })
 })
 
+/*
+None of these tests use vi.mock or need a Provider because SummaryBar
+gets all its data through props. This makes the presentational component
+simple and easy to test.
+
+The container is harder to test because it depends on context and needs
+a Provider or mocking to supply the data.
+*/
 /*
 None of these tests use vi.mock or need a Provider because SummaryBar
 gets all its data through props. This makes the presentational component

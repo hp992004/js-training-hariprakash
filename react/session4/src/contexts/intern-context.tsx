@@ -17,66 +17,56 @@ inside useEffect and contains hardcoded default data. These internal
 dependencies make tests slower and require fake timers or extra setup.
 */
 
-import { createContext, useContext, useState, useEffect } from 'react'
-import type {ReactNode} from 'react'
+import { createContext, useContext } from 'react'
+import type { ReactNode } from 'react'
 
-interface Intern {
-  id: number; name: string; score: number; role: string; isPresent: boolean
-}
+import { useInternRepository } from '../repositories/intern-repository'
+import {
+  createIntern,
+  calculateAverageScore,
+} from '../services/intern-service'
 
-type NewIntern = Omit<Intern, 'id'>
+import type {
+  Intern,
+  InternFormState,
+} from '../types/intern'
+
 interface InternContextType {
-  interns:      Intern[]
-  isLoading:    boolean
-  addIntern:    (intern: NewIntern) => void
+  interns: Intern[]
+  averageScore: number
+  addIntern: (form: InternFormState) => void
   removeIntern: (id: number) => void
-}
-
-interface InternProviderProps {
-  children: ReactNode
-  generateId?: () => number
 }
 
 const InternContext = createContext<InternContextType | null>(null)
 
-export function InternProvider({children,generateId = Date.now,}: InternProviderProps) {
-  const [interns,   setInterns]   = useState<Intern[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+interface InternProviderProps {
+  children: ReactNode
+}
 
-  const defaultInterns: Intern[] = [
-    { id: 1, name: 'Rahul', score: 92, role: 'Frontend',  isPresent: true  },
-    { id: 2, name: 'Priya', score: 78, role: 'Backend',   isPresent: true  },
-    { id: 3, name: 'Amit',  score: 45, role: 'Frontend',  isPresent: false },
-    { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true  },
-  ]
+export function InternProvider({
+  children,
+}: InternProviderProps) {
+  const repo = useInternRepository()
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setInterns(prev => {
-        const existingNames = new Set(prev.map(i => i.name))
-        const missing = defaultInterns.filter(d => !existingNames.has(d.name))
-        return missing.length > 0 ? [...prev, ...missing] : prev
-      })
-      setIsLoading(false)
-    }, 800)
-    return () => clearTimeout(timer)
-  }, [])
-
-  function addIntern(intern: NewIntern): void {
-    const newIntern: Intern = {
-      ...intern,
-      id: generateId(),
-    }
-        setInterns(prev => [...prev, newIntern])
+  function addIntern(form: InternFormState): void {
+    const intern = createIntern(form)
+    repo.add(intern)
   }
 
-
   function removeIntern(id: number): void {
-    setInterns(prev => prev.filter(i => i.id !== id))
+    repo.remove(id)
+  }
+
+  const value: InternContextType = {
+    interns: repo.interns,
+    averageScore: calculateAverageScore(repo.interns),
+    addIntern,
+    removeIntern,
   }
 
   return (
-    <InternContext.Provider value={{ interns, isLoading, addIntern, removeIntern }}>
+    <InternContext.Provider value={value}>
       {children}
     </InternContext.Provider>
   )
@@ -84,7 +74,13 @@ export function InternProvider({children,generateId = Date.now,}: InternProvider
 
 export function useInterns(): InternContextType {
   const context = useContext(InternContext)
-  if (!context) throw new Error('useInterns must be used inside InternProvider')
+
+  if (!context) {
+    throw new Error(
+      'useInterns must be used inside InternProvider'
+    )
+  }
+
   return context
 }
 
