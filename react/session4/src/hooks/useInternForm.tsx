@@ -1,38 +1,84 @@
+/*
+Testability audit — useInternForm.ts
+
+Q1 Predictable output?       YES — same form input always gives the same validation result
+Q2 No external dependencies? YES — no API calls, timers, or browser APIs
+Q3 Dependencies injectable?  YES — form values are controlled through event inputs
+
+Verdict: HIGHLY TESTABLE
+*/
+
 import { useState } from 'react'
+import { validateInternForm } from '../utils/intern-validation'
+
+interface Intern {
+  id: number
+  name: string
+  score: number
+  role: string
+  isPresent: boolean
+}
 
 interface InternFormState {
-  name:      string
-  score:     number
+  name: string
+  score: number
   isPresent: boolean
-  role:      string
+  role: string
 }
 
 interface UseInternFormReturn {
-  form:         InternFormState
-  error:        string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
-  handleReset:  () => void
-  isValid:      () => boolean
+  form: InternFormState
+  error: string
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void
+  handleReset: () => void
+  isValid: () => boolean
+  handleSubmit: () => boolean
 }
 
 const initialForm: InternFormState = {
-  name: '', score: 0, isPresent: true, role: 'Frontend',
+  name: '',
+  score: 0,
+  isPresent: true,
+  role: 'Frontend',
 }
 
-function useInternForm(): UseInternFormReturn {
-  const [form,  setForm]  = useState<InternFormState>(initialForm)
+function useInternForm(
+  addIntern: (intern: Intern) => void,
+  generateId: () => number = Date.now
+): UseInternFormReturn {
+  const [form, setForm] = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>('')
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void {
     const { name, value, type } = e.target
+
+    const nextValue =
+      type === 'checkbox'
+        ? (e.target as HTMLInputElement).checked
+        : name === 'score'
+          ? Number(value)
+          : value
+
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : name === 'score' ? Number(value) : value,
+      [name]: nextValue,
     }))
+
+    if (name === 'name' && String(nextValue).trim()) {
+      setError('')
+    }
+
+    if (
+      name === 'score' &&
+      Number(nextValue) >= 0 &&
+      Number(nextValue) <= 100
+    ) {
+      setError('')
+    }
   }
 
   function handleReset(): void {
@@ -41,13 +87,49 @@ function useInternForm(): UseInternFormReturn {
   }
 
   function isValid(): boolean {
-    if (!form.name.trim()) { setError('Name is required'); return false }
-    if (form.score < 0 || form.score > 100) { setError('Score must be 0–100'); return false }
+    const validationError = validateInternForm(
+      form.name,
+      form.score
+    )
+
+    if (validationError) {
+      setError(validationError)
+      return false
+    }
+
     setError('')
     return true
   }
 
-  return { form, error, handleChange, handleReset, isValid }
+  function handleSubmit(): boolean {
+    const validationError = validateInternForm(
+      form.name,
+      form.score
+    )
+
+    if (validationError) {
+      setError(validationError)
+      return false
+    }
+
+    addIntern({
+      ...form,
+      id: generateId(),
+    })
+
+    handleReset()
+
+    return true
+  }
+
+  return {
+    form,
+    error,
+    handleChange,
+    handleReset,
+    isValid,
+    handleSubmit,
+  }
 }
 
 export default useInternForm
