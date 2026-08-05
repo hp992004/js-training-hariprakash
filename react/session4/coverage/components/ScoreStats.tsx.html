@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">55.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -102,29 +102,21 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -135,7 +127,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,22 +145,18 @@
 import { useInterns } from '../contexts/intern-context'
 &nbsp;
 function ScoreStats() {
-  const { interns, isLoading } = useInterns()
+  const { interns } = useInterns()
 &nbsp;
   const stats = useMemo(() =&gt; {
-    const scores = interns.map(i =&gt; i.score)
+    const scores = interns.<span class="fstat-no" title="function not covered" >map(i</span> =&gt; <span class="cstat-no" title="statement not covered" >i.score)</span>
     return {
-      highest: scores.length &gt; 0 ? Math.max(...scores) : 0,
-      lowest: scores.length &gt; 0 ? Math.min(...scores) : 0,
+      highest: scores.length &gt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >Math.max(...scores) : 0</span>,
+      lowest: scores.length &gt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >Math.min(...scores) : 0</span>,
       average:
-        scores.length &gt; 0 ? Math.round(scores.reduce((a, b) =&gt; a + b, 0) / scores.length) : 0,
-      passing: interns.filter(i =&gt; i.score &gt;= 50).length,
+        scores.length &gt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >Math.round(scores.<span class="fstat-no" title="function not covered" >reduce((a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >a + b, 0</span>) / scores.length) : 0</span>,
+      passing: interns.<span class="fstat-no" title="function not covered" >filter(i</span> =&gt; <span class="cstat-no" title="statement not covered" >i.score &gt;= 50)</span>.length,
     }
   }, [interns])
-&nbsp;
-  if (isLoading) {
-    return &lt;p&gt;Loading interns...&lt;/p&gt;
-  }
 &nbsp;
   return (
     &lt;div style={{ padding: '12px', background: '#f9f9f9', marginBottom: '12px' }}&gt;
@@ -177,8 +165,8 @@ function ScoreStats() {
 &nbsp;
       {/* Render intern names so tests can assert data loaded */}
       &lt;div&gt;
-        {interns.map(i =&gt; (
-          &lt;span key={i.id}&gt;{i.name}&lt;/span&gt;
+        {interns.<span class="fstat-no" title="function not covered" >map(i</span> =&gt; (
+<span class="cstat-no" title="statement not covered" >          &lt;span key={i.id}&gt;{i.name}&lt;/span&gt;</span>
         ))}
       &lt;/div&gt;
     &lt;/div&gt;
@@ -199,7 +187,7 @@ It can waste time by doing the same calculation over and over.
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-31T09:49:31.048Z
+                at 2026-08-05T10:31:44.013Z
             </div>
         <script src="../prettify.js"></script>
         <script>

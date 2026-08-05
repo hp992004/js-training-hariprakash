@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -154,6 +154,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,6 +165,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,8 +178,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,14 +185,11 @@
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,56 +215,56 @@ Q3 Dependencies injectable?  YES — the context can be mocked during testing
 Verdict: MODERATELY TESTABLE
 */
 import { useInterns } from '../contexts/intern-context'
-&nbsp;
+import {   sortInternsByScore,calculateAverageScore } from '../services/intern-service'
+import type { Intern } from '../types/intern'
 export function SummaryBar({
   total,
   presentCount,
   averageScore,
+  sortedInterns,
 }: {
   total: number
   presentCount: number
   averageScore: number
+  sortedInterns: Intern[]
 }) {
   return (
-    &lt;div
-      style={{
-        padding: '12px',
-        background: '#f9f9f9',
-        marginBottom: '12px',
-      }}
-    &gt;
+    &lt;div&gt;
       &lt;p&gt;
         Total: {total} | Present: {presentCount} | Avg Score: {averageScore}
       &lt;/p&gt;
+&nbsp;
+      &lt;ul&gt;
+        {sortedInterns.map(intern =&gt; (
+          &lt;li key={intern.id}&gt;
+            {intern.name} - {intern.score}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
     &lt;/div&gt;
   )
 }
 &nbsp;
 export function SummaryBarContainer() {
-  const { interns, isLoading } = useInterns()
-&nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (isLoading) {
-<span class="cstat-no" title="statement not covered" >    return &lt;p&gt;Loading summary...&lt;/p&gt;</span>
-  }
+  const { interns} = useInterns()
 &nbsp;
   const total = interns.length
+&nbsp;
+  const sortedInterns = sortInternsByScore(interns, 'desc')
 &nbsp;
   const presentCount = interns.filter(
     intern =&gt; intern.isPresent
   ).length
 &nbsp;
-  const averageScore = interns.length
-    ? Math.round(
-        interns.reduce((sum, intern) =&gt; sum + intern.score, 0) /
-          interns.length
-      )
-    : <span class="branch-1 cbranch-no" title="branch not covered" >0</span>
+  // Use the service instead of calculating here
+  const averageScore = calculateAverageScore(interns)
 &nbsp;
   return (
     &lt;SummaryBar
       total={total}
       presentCount={presentCount}
       averageScore={averageScore}
+      sortedInterns={sortedInterns}
     /&gt;
   )
 }
@@ -283,7 +283,7 @@ Mocking the context keeps the test fast, repeatable, and independent of other te
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-31T09:49:31.048Z
+                at 2026-08-05T10:31:44.013Z
             </div>
         <script src="../prettify.js"></script>
         <script>

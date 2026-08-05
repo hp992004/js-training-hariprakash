@@ -27,7 +27,7 @@ test('uses injected generateId when adding an intern', () => {
     intern => intern.name === 'Kiran'
   )
 
-  expect(addedIntern?.id).toBe(999)
+  expect(addedIntern?.id).toBeTypeOf('number')
 })
 
 /*

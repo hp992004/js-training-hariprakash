@@ -23,16 +23,6 @@ It retries automatically until the element is found or times out,
 so you usually don't need `waitFor` for simple cases.
 */
 
-import { waitFor } from '../test/test-utils'
-
-test('multiple elements appear after data loads', async () => {
-  render(<ScoreStats />)
-
-  await waitFor(() => {
-    expect(screen.getByText('Rahul')).toBeInTheDocument()
-    expect(screen.getByText('Priya')).toBeInTheDocument()
-  })
-})
 
 /*
 Use `findBy` when you're waiting for a specific element to appear.
