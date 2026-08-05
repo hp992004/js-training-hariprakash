@@ -1,3 +1,4 @@
+
 import { describe, test, expect, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import useInternForm from '../hooks/useInternForm'
@@ -5,8 +6,15 @@ import { validateInternForm } from '../utils/intern-validation'
 
 describe('validateInternForm', () => {
   test('validates form data without rendering a hook', () => {
-    expect(validateInternForm('Rahul', 92)).toBeNull()
-    expect(validateInternForm('', 92)).toBe('Name is required')
+    expect(() =>
+      validateInternForm('Rahul', 92)
+    ).not.toThrow()
+
+    expect(() =>
+      validateInternForm('', 92)
+    ).toThrow(
+      'validateInternForm: expected a non-empty name, got: ""'
+    )
   })
 })
 
@@ -65,7 +73,9 @@ describe('useInternForm submit', () => {
     })
 
     expect(addIntern).not.toHaveBeenCalled()
-    expect(result.current.error).toBe('Name is required')
+    expect(result.current.error).toBe(
+      'validateInternForm: expected a non-empty name, got: ""'
+    )
   })
 
   test('clears error after a successful submit', () => {
@@ -80,7 +90,9 @@ describe('useInternForm submit', () => {
       result.current.handleSubmit()
     })
 
-    expect(result.current.error).toBe('Name is required')
+    expect(result.current.error).toBe(
+      'validateInternForm: expected a non-empty name, got: ""'
+    )
 
     // Fix the invalid name
     act(() => {
@@ -93,7 +105,6 @@ describe('useInternForm submit', () => {
       } as React.ChangeEvent<HTMLInputElement>)
     })
 
-    // Submit valid form
     act(() => {
       result.current.handleSubmit()
     })
@@ -102,7 +113,6 @@ describe('useInternForm submit', () => {
     expect(result.current.error).toBe('')
   })
 })
-
 
 /*
 Before the refactor, each test needed more Arrange code to set up the context,

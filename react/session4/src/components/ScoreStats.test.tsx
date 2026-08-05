@@ -1,21 +1,20 @@
 import { render, screen } from '../test/test-utils'
 import ScoreStats from './ScoreStats'
 
-test('shows loading state initially', () => {
+test('shows empty statistics when there are no interns', () => {
   render(<ScoreStats />)
 
-  expect(screen.getByText('Loading interns...')).toBeInTheDocument()
+  expect(screen.getByText(/Highest: 0/)).toBeInTheDocument()
+  expect(screen.getByText(/Lowest: 0/)).toBeInTheDocument()
+  expect(screen.getByText(/Avg: 0/)).toBeInTheDocument()
 })
 
-test('shows intern data after loading completes', async () => {
+test('does not show a loading message', () => {
   render(<ScoreStats />)
 
-
-  const rahul = await screen.findByText('Rahul')
-  expect(rahul).toBeInTheDocument()
-
-
-  expect(screen.queryByText('Loading interns...')).not.toBeInTheDocument()
+  expect(
+    screen.queryByText('Loading interns...')
+  ).not.toBeInTheDocument()
 })
 
 /*

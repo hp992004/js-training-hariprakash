@@ -86,31 +86,20 @@ function useInternForm(
     setError('')
   }
 
-  function isValid(): boolean {
-    const validationError = validateInternForm(
-      form.name,
-      form.score
-    )
-
-    if (validationError) {
-      setError(validationError)
-      return false
-    }
-
+function isValid(): boolean {
+  try {
+    validateInternForm(form.name, form.score)
     setError('')
     return true
+  } catch (error) {
+    setError((error as Error).message)
+    return false
   }
+}
 
-  function handleSubmit(): boolean {
-    const validationError = validateInternForm(
-      form.name,
-      form.score
-    )
-
-    if (validationError) {
-      setError(validationError)
-      return false
-    }
+function handleSubmit(): boolean {
+  try {
+    validateInternForm(form.name, form.score)
 
     addIntern({
       ...form,
@@ -118,9 +107,12 @@ function useInternForm(
     })
 
     handleReset()
-
     return true
+  } catch (error) {
+    setError((error as Error).message)
+    return false
   }
+}
 
   return {
     form,

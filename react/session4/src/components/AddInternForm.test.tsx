@@ -152,7 +152,11 @@ describe('AddInternForm', () => {
 
       await user.click(screen.getByRole('button', { name: 'Add Intern' }))
 
-      expect(screen.getByText('Name is required')).toBeInTheDocument()
+      expect(
+  screen.getByText(
+    'validateInternForm: expected a non-empty name, got: ""'
+  )
+).toBeInTheDocument()
     })
 
     test('shows error when score is above 100', async () => {
@@ -164,7 +168,11 @@ describe('AddInternForm', () => {
       await user.type(screen.getByPlaceholderText('Score'), '150')
       await user.click(screen.getByRole('button', { name: 'Add Intern' }))
 
-expect(screen.getByText('Score must be 0–100')).toBeInTheDocument()
+expect(
+  screen.getByText(
+    'validateInternForm: expected score between 0 and 100, got: 150'
+  )
+).toBeInTheDocument()
     })
 
     test('clears error when valid name is entered', async () => {
@@ -172,12 +180,20 @@ expect(screen.getByText('Score must be 0–100')).toBeInTheDocument()
       render(<AddInternForm onAdd={() => {}} count={0} />)
 
       await user.click(screen.getByRole('button', { name: 'Add Intern' }))
-      expect(screen.getByText('Name is required')).toBeInTheDocument()
+      expect(
+  screen.getByText(
+    'validateInternForm: expected a non-empty name, got: ""'
+  )
+).toBeInTheDocument()
 
       await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
 
       await waitFor(() => {
-        expect(screen.queryByText('Name is required')).not.toBeInTheDocument()
+        expect(
+  screen.queryByText(
+    'validateInternForm: expected a non-empty name, got: ""'
+  )
+).not.toBeInTheDocument()
       })
     })
   })

@@ -5,9 +5,10 @@ import { useInterns } from '../contexts/intern-context'
 test('throws an error when useInterns is used without InternProvider', () => {
   expect(() => {
     renderHook(() => useInterns())
-  }).toThrow('useInterns must be used inside InternProvider')
+  }).toThrow(
+    'useInterns: expected to be called inside <InternProvider>, but no provider was found.'
+  )
 })
-
 
 /*
 Yes, the branch coverage for `intern-context.tsx` increased from 50% to 100%

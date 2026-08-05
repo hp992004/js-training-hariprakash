@@ -1,11 +1,23 @@
 
 import type { Intern, InternFormState } from '../types/intern'
-
+import { assert } from '../utils/assert'
 
 export function createIntern(
   form: InternFormState,
   generateId: () => number = Date.now
 ): Intern {
+  if (!form.name.trim()) {
+    throw new Error('createIntern: name is required')
+  }
+
+  if (form.score < 0 || form.score > 100) {
+    throw new Error('createIntern: score must be between 0 and 100')
+  }
+
+  if (!form.role.trim()) {
+    throw new Error('createIntern: role is required')
+  }
+
   return {
     id: generateId(),
     name: form.name.trim(),
@@ -56,15 +68,20 @@ export function filterInterns(
 ): Intern[] {
   const search = query.trim().toLowerCase()
 
-  if (!search) {
-    return interns
-  }
+  const result = !search
+    ? interns
+    : interns.filter(
+        intern =>
+          intern.name.toLowerCase().includes(search) ||
+          intern.role.toLowerCase().includes(search)
+      )
 
-  return interns.filter(
-    intern =>
-      intern.name.toLowerCase().includes(search) ||
-      intern.role.toLowerCase().includes(search)
+  assert(
+    Array.isArray(result),
+    'filterInterns: expected result to be an array'
   )
+
+  return result
 }
 
 export function sortInternsByScore(

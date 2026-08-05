@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useInterns } from '../contexts/intern-context'
 
 function ScoreStats() {
-  const { interns, isLoading } = useInterns()
+  const { interns } = useInterns()
 
   const stats = useMemo(() => {
     const scores = interns.map(i => i.score)
@@ -14,10 +14,6 @@ function ScoreStats() {
       passing: interns.filter(i => i.score >= 50).length,
     }
   }, [interns])
-
-  if (isLoading) {
-    return <p>Loading interns...</p>
-  }
 
   return (
     <div style={{ padding: '12px', background: '#f9f9f9', marginBottom: '12px' }}>

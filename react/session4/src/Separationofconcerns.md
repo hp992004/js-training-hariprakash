@@ -213,8 +213,6 @@ Job: "This file displays the intern summary and uses a container component to ob
 AddInternForm.tsx
 Job: "This file renders the Add Intern form and delegates form behavior to the useInternForm coordination hook."
 
-
-
 Comment:
 
 Yes, every file has a clearer and more focused one-sentence description after the refactor because each file now has a more specific responsibility. The file that is still the hardest to describe in one sentence is useInternForm.ts because it acts as a coordination hook. It manages the form state while also coordinating between the UI, the service layer, and the context, so its responsibility spans multiple layers even though it doesn't contain the core business logic.

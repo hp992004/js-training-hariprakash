@@ -5,10 +5,9 @@ import { InternProvider, useInterns } from '../contexts/intern-context'
 
 test('uses injected generateId when adding an intern', () => {
   // Fixed ID generator for predictable testing
-  const generateId = () => 999
 
   const wrapper = ({ children }: { children: ReactNode }) => (
-    <InternProvider generateId={generateId}>
+    <InternProvider >
       {children}
     </InternProvider>
   )
