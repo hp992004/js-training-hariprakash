@@ -1,0 +1,220 @@
+.book-call {
+  padding: 120px 8%;
+  background: #0f172a;
+}
+
+.book-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.book-left h2 {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: white;
+  margin: 20px 0;
+  line-height: 1.2;
+}
+
+.book-left p {
+  color: #94a3b8;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.book-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.book-benefits div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.book-benefits svg {
+  color: #7c3aed;
+  font-size: 1.2rem;
+}
+
+.book-right {
+  background: #172033;
+  border: 1px solid #273449;
+  border-radius: 20px;
+  padding: 35px;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: white;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 15px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #7c3aed;
+}
+
+.time-section label {
+  color: white;
+  font-weight: 600;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.slot input {
+  accent-color: #7c3aed;
+}
+
+.agree-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.agree-box input {
+  accent-color: #7c3aed;
+  margin-top: 3px;
+}
+
+.book-right button {
+  width: 100%;
+  padding: 16px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: .3s;
+}
+
+.book-right button:hover {
+  background: #6d28d9;
+}
+
+.book-right button:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 992px) {
+
+  .book-call {
+    padding: 100px 6%;
+  }
+
+  .book-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .book-left {
+    text-align: center;
+  }
+
+  .book-benefits {
+    align-items: center;
+  }
+
+  .book-benefits div {
+    justify-content: center;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .book-call {
+    padding: 80px 5%;
+  }
+
+  .book-right {
+    padding: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .time-slots {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .book-call {
+    padding: 70px 20px;
+  }
+
+  .book-left p {
+    font-size: .95rem;
+  }
+
+  .book-right {
+    padding: 20px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 14px;
+    font-size: .95rem;
+  }
+
+  .book-right button {
+    padding: 14px;
+    font-size: .95rem;
+  }
+
+}

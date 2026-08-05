@@ -19,12 +19,24 @@ type CounterAction =
   | { type: 'decrement' }
   | { type: 'reset' }
 
-function useCounter({
-  initial = 0,
-  min = -Infinity,
-  max = Infinity,
-  step = 1,
-}: UseCounterOptions = {}): UseCounterReturn {
+function useCounter(
+  initialOrOptions: number | UseCounterOptions = 0,
+): UseCounterReturn {
+  const {
+    initial,
+    min,
+    max,
+    step,
+  } =
+    typeof initialOrOptions === 'number'
+      ? { initial: initialOrOptions, min: -Infinity, max: Infinity, step: 1 }
+      : {
+          initial: initialOrOptions.initial ?? 0,
+          min: initialOrOptions.min ?? -Infinity,
+          max: initialOrOptions.max ?? Infinity,
+          step: initialOrOptions.step ?? 1,
+        }
+
   function reducer(state: number, action: CounterAction): number {
     switch (action.type) {
       case 'increment':
