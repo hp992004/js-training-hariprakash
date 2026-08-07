@@ -19,8 +19,10 @@ const InternRow = memo(function InternRow({
 
   console.log(`InternRow rendered: ${name}`)
 
+  const badge = score >= 50 ? 'Pass' : 'Fail'
+
   return (
-    <div
+    <div role="row"
       style={{
         background: theme === 'light' ? '#fff' : '#2a2a2a',
         color: theme === 'light' ? '#000' : '#eee',
@@ -31,6 +33,7 @@ const InternRow = memo(function InternRow({
       <span>
         {name} — {score}
       </span>
+      <span> {badge}</span>
       <button onClick={() => onRemove(id)}>Remove</button>
     </div>
   )
@@ -44,7 +47,7 @@ function InternListWithCallback() {
   }, [removeIntern])
 
   return (
-    <div>
+    <div role="rowgroup">
       {interns.map((i) => (
         <InternRow
           key={i.id}
@@ -65,3 +68,4 @@ export default InternListWithCallback
 This helps prevent unnecessary re-renders when passing functions as props.
 It improves performance by keeping the same function reference when dependencies don't change.
 */
+
