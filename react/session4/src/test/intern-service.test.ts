@@ -1,4 +1,3 @@
-// src/test/intern-service.test.ts
 
 import { describe, it, expect } from 'vitest'
 import {
@@ -8,7 +7,7 @@ import {
   getScoreLabel,
   filterInterns,
   sortInternsByScore,
-} from '../services/intern-service'
+} from '../services'
 import type {
   Intern,
   InternFormState,

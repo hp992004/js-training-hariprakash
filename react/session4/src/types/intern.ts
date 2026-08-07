@@ -14,4 +14,5 @@ export interface InternFormState {
   isPresent: boolean
 }
 
+
 export type NewIntern = Omit<Intern, 'id'>

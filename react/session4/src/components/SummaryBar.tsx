@@ -8,7 +8,10 @@ Q3 Dependencies injectable?  YES — the context can be mocked during testing
 Verdict: MODERATELY TESTABLE
 */
 import { useInterns } from '../contexts/intern-context'
-import {   sortInternsByScore,calculateAverageScore } from '../services/intern-service'
+import {
+  sortInternsByScore,
+  calculateAverageScore,
+} from '../services';
 import type { Intern } from '../types/intern'
 export function SummaryBar({
   total,
