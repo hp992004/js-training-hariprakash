@@ -11,7 +11,7 @@ function Navbar() {
       display:    'flex',
       justifyContent: 'space-between',
     }}>
-      <span>Intern Dashboard</span>
+      <h1 style={{ margin: 0, fontSize: '1.25rem', color: 'black' }}>Intern Dashboard</h1>
       <button onClick={toggleTheme}>
         Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
       </button>
